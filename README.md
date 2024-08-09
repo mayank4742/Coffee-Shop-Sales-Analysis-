@@ -18,37 +18,6 @@ let
 in
     ChangedType
 
-**Python Data Cleaning (Using Pandas)**
-
-# Load data
-data = pd.read_csv('sales_data.csv')
-
-# Data Cleaning
-data.dropna(inplace=True)  # Remove missing values
-data['TransactionTime'] = pd.to_datetime(data['TransactionTime'])  # Convert to datetime
-
-# Data Transformation
-data['Month'] = data['TransactionTime'].dt.to_period('M')
-monthly_sales = data.groupby(['StoreLocation', 'ProductCategory', 'Month']).agg(
-    TotalSales=('SalesAmount', 'sum'),
-    AverageTransactionValue=('SalesAmount', 'mean')
-).reset_index()
-**SQL Query for Data Extraction**
--- Extract sales data with relevant details
-SELECT 
-    StoreLocation, 
-    ProductCategory, 
-    TransactionTime, 
-    SUM(SalesAmount) AS TotalSales, 
-    AVG(SalesAmount) AS AverageTransactionValue
-FROM 
-    Sales
-GROUP BY 
-    StoreLocation, 
-    ProductCategory, 
-    TransactionTime
-ORDER BY 
-    TotalSales DESC;
 **Power BI Data Analysis (DAX Example)**
 -- Total Sales
 TotalSales = SUM(Sales[SalesAmount])
